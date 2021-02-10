@@ -1,19 +1,30 @@
+
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div id="nav">
+    <Navbar/>
+  </div>
+  <router-view/>
 </template>
-
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+import Navbar from  "./components/Navbar"
+import "bootstrap"
+import 'bootstrap/dist/css/bootstrap.min.css'
+import 'jquery/src/jquery.js'
+import 'bootstrap/dist/js/bootstrap.min.js'
+import { getUserInfo } from './api'
 export default {
-  name: 'App',
-  components: {
-    HelloWorld
+  data(){
+    return{
+    }
+  },
+  components:{
+    Navbar
+  },
+  async created(){
+    this.$store.commit("setUser",await getUserInfo())
   }
 }
 </script>
-
 <style>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
@@ -21,6 +32,5 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
 }
 </style>
